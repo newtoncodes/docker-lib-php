@@ -1,5 +1,6 @@
 FROM newtoncodes/php:7.1
 
+RUN apt-get update
 RUN DEBIAN_FRONTEND="noninteractive" apt-get install -y php7.1-fpm \
  && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
