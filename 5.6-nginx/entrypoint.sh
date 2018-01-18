@@ -36,6 +36,9 @@ if [ "$1" = "php-fpm" ]; then
     echo "TIMESTAMP = $TIMESTAMP";
     echo "";
 
+    sed -i "s^catch_workers_output = yes^;catch_workers_output = yes^" /etc/php/5.6/fpm/pool.d/www.conf
+    sed -i "s^error_log = /proc/self/fd/2^;error_log = /proc/self/fd/2^" /etc/php/5.6/fpm/pool.d/www.conf
+    sed -i "s^access.log = /proc/self/fd/2^;access.log = /proc/self/fd/2^" /etc/php/5.6/fpm/pool.d/www.conf
     sed -i "s^listen = 0\.0\.0\.0\:9000.*^listen = /run/php/php-fpm.sock^" /etc/php/5.6/fpm/pool.d/www.conf
     sed -i "s/env\[CPU_COUNT] =.*/env[CPU_COUNT] = $CPU_COUNT;/" /etc/php/5.6/fpm/pool.d/www.conf
     sed -i "s/env\[CONTAINER_ID] =.*/env[CONTAINER_ID] = $CONTAINER_ID;/" /etc/php/5.6/fpm/pool.d/www.conf
