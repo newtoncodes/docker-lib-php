@@ -10,9 +10,8 @@ newtoncodes/php:5.6-fpm
 
 newtoncodes/php:7.1
 newtoncodes/php:7.1-fpm
-
-newtoncodes/php:7.2
-newtoncodes/php:7.2-fpm
 ```
+
+7.2 is under development, it will be added later.
 
 Default version: 5.6
