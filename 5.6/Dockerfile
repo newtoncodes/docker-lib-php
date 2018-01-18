@@ -15,4 +15,4 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y nodejs build-essential
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-COPY config/php/cli/php.ini /etc/php/5.6/cli/php.ini
+COPY config/cli/php.ini /etc/php/5.6/cli/php.ini

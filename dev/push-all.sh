@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 docker push newtoncodes/php
 docker push newtoncodes/php:5.6
 docker push newtoncodes/php:5.6-fpm

@@ -2,6 +2,8 @@
 
 dir=$(cd $(dirname ${BASH_SOURCE[0]}) && pwd)
 
+set -e
+
 cd ${dir}/../5.6 && docker build -t newtoncodes/mysql .
 cd ${dir}/../5.6 && docker build -t newtoncodes/mysql:5.6 .
 cd ${dir}/../5.6-fpm && docker build -t newtoncodes/mysql:5.6-fpm .
