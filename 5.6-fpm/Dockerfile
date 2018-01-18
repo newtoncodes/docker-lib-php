@@ -9,3 +9,10 @@ RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
 COPY config/fpm/php.ini /etc/php/5.6/fpm/php.ini
 COPY config/fpm/pool.d/www.conf /etc/php/5.6/fpm/pool.d/www.conf
+
+
+COPY entrypoint.sh /usr/bin/entrypoint
+RUN chmod +x /usr/bin/entrypoint
+
+ENTRYPOINT ["/usr/bin/entrypoint"]
+CMD ["php-fpm"]

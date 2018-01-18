@@ -16,3 +16,10 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y nodejs build-essential
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 COPY config/cli/php.ini /etc/php/7.1/cli/php.ini
+
+
+COPY entrypoint.sh /usr/bin/entrypoint
+RUN chmod +x /usr/bin/entrypoint
+
+ENTRYPOINT ["/usr/bin/entrypoint"]
+CMD ["php"]
