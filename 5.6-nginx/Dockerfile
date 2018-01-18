@@ -14,6 +14,7 @@ RUN rm -rf /var/www
 COPY www /var/www
 
 
+ENV THREADS=auto
 EXPOSE 80 443
 
 COPY entrypoint.sh /usr/bin/entrypoint
