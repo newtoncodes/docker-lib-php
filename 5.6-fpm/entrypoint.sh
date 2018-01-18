@@ -21,6 +21,7 @@ if [ "$1" = "php-fpm" ]; then
     sed -i "s/env\[TIMESTAMP] =.*/env[TIMESTAMP] = $TIMESTAMP;/" /etc/php/5.6/fpm/pool.d/www.conf
     sed -i "s/pm.max_children = .*/pm.max_children = $CPU_COUNT/" /etc/php/5.6/fpm/pool.d/www.conf
 
+    mkdir -p /var/run/php
     exec php-fpm5.6
 fi
 

@@ -10,8 +10,4 @@ tmp_=${tmp_:0:19};
 export TIMESTAMP=$(echo "$tmp_" | sed 's/[ \:\-]//g');
 
 
-if [ "$1" = "php" ]; then
-    exec php7.1
-fi
-
 exec "$@"
