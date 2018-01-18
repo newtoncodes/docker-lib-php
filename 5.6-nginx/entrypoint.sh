@@ -36,7 +36,7 @@ if [ "$1" = "php-fpm" ]; then
     echo "TIMESTAMP = $TIMESTAMP";
     echo "";
 
-    sed -i "s/listen = 0.0.0.0:9000.*/listen = /run/php/php-fpm.sock/" /etc/php/5.6/fpm/pool.d/www.conf
+    sed -i "s^listen = 0\.0\.0\.0\:9000.*^listen = /run/php/php-fpm.sock^" /etc/php/5.6/fpm/pool.d/www.conf
     sed -i "s/env\[CPU_COUNT] =.*/env[CPU_COUNT] = $CPU_COUNT;/" /etc/php/5.6/fpm/pool.d/www.conf
     sed -i "s/env\[CONTAINER_ID] =.*/env[CONTAINER_ID] = $CONTAINER_ID;/" /etc/php/5.6/fpm/pool.d/www.conf
     sed -i "s/env\[TIMESTAMP] =.*/env[TIMESTAMP] = $TIMESTAMP;/" /etc/php/5.6/fpm/pool.d/www.conf
@@ -53,7 +53,7 @@ if [ "$1" = "supervisord" ]; then
     echo "TIMESTAMP = $TIMESTAMP";
     echo "";
 
-    exec /usr/bin/supervisord
+    exec /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
     exit
 fi
 
