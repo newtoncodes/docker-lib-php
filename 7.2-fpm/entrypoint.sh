@@ -19,7 +19,12 @@ if [ "$1" = "php-fpm" ]; then
     sed -i "s/env\[CPU_COUNT] =.*/env[CPU_COUNT] = $CPU_COUNT;/" /etc/php/7.2/fpm/pool.d/www.conf
     sed -i "s/env\[CONTAINER_ID] =.*/env[CONTAINER_ID] = $CONTAINER_ID;/" /etc/php/7.2/fpm/pool.d/www.conf
     sed -i "s/env\[TIMESTAMP] =.*/env[TIMESTAMP] = $TIMESTAMP;/" /etc/php/7.2/fpm/pool.d/www.conf
-    sed -i "s/pm.max_children = .*/pm.max_children = $CPU_COUNT/" /etc/php/7.2/fpm/pool.d/www.conf
+
+    if [ "$THREADS" = "auto" ]; then
+        sed -i "s/pm.max_children = .*/pm.max_children = $CPU_COUNT/" /etc/php/7.1/fpm/pool.d/www.conf
+    else
+        sed -i "s/pm.max_children = .*/pm.max_children = $THREADS/" /etc/php/7.1/fpm/pool.d/www.conf
+    fi
 
     mkdir -p /var/run/php
     exec php-fpm7.2

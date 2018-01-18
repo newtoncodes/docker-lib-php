@@ -16,7 +16,11 @@ if [ "$1" = "nginx" ]; then
     echo "TIMESTAMP = $TIMESTAMP";
     echo "";
 
-    sed -i "s/worker_processes .*/worker_processes $CPU_COUNT;/" /etc/nginx/nginx.conf
+    if [ "$THREADS" = "auto" ]; then
+        sed -i "s/worker_processes .*/worker_processes $CPU_COUNT;/" /etc/nginx/nginx.conf
+    else
+        sed -i "s/worker_processes .*/worker_processes $THREADS;/" /etc/nginx/nginx.conf
+    fi
 
     sed -i "s#access_log /var/log/nginx/access.log#access_log /var/log/nginx/access.$TIMESTAMP-$CONTAINER_ID.log#" /etc/nginx/nginx.conf
     sed -i "s#error_log /var/log/nginx/error.log#error_log /var/log/nginx/error.$TIMESTAMP-$CONTAINER_ID.log#" /etc/nginx/nginx.conf
@@ -43,7 +47,12 @@ if [ "$1" = "php-fpm" ]; then
     sed -i "s/env\[CPU_COUNT] =.*/env[CPU_COUNT] = $CPU_COUNT;/" /etc/php/5.6/fpm/pool.d/www.conf
     sed -i "s/env\[CONTAINER_ID] =.*/env[CONTAINER_ID] = $CONTAINER_ID;/" /etc/php/5.6/fpm/pool.d/www.conf
     sed -i "s/env\[TIMESTAMP] =.*/env[TIMESTAMP] = $TIMESTAMP;/" /etc/php/5.6/fpm/pool.d/www.conf
-    sed -i "s/pm.max_children = .*/pm.max_children = $CPU_COUNT/" /etc/php/5.6/fpm/pool.d/www.conf
+
+    if [ "$THREADS" = "auto" ]; then
+        sed -i "s/pm.max_children = .*/pm.max_children = $CPU_COUNT/" /etc/php/5.6/fpm/pool.d/www.conf
+    else
+        sed -i "s/pm.max_children = .*/pm.max_children = $THREADS/" /etc/php/5.6/fpm/pool.d/www.conf
+    fi
 
     mkdir -p /var/run/php
     exec php-fpm5.6
