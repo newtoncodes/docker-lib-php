@@ -10,6 +10,8 @@ COPY config/fpm/php.ini /etc/php/7.1/fpm/php.ini
 COPY config/fpm/pool.d/www.conf /etc/php/7.1/fpm/pool.d/www.conf
 
 
+EXPOSE [9000]
+
 COPY entrypoint.sh /usr/bin/entrypoint
 RUN chmod +x /usr/bin/entrypoint
 
