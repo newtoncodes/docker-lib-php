@@ -6,8 +6,6 @@ RUN DEBIAN_FRONTEND="noninteractive" apt-get install -y php5.6-fpm \
 
 RUN pecl channel-update pecl.php.net
 
-RUN echo "daemon off;" >> /etc/nginx/nginx.conf
-
 COPY config/fpm/php.ini /etc/php/5.6/fpm/php.ini
 COPY config/fpm/pool.d/www.conf /etc/php/5.6/fpm/pool.d/www.conf
 
